@@ -48,6 +48,12 @@
     <!-- Chart.js 3.9 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
+    <!-- Chart.js Venn Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-venn@3.6.0/build/index.umd.min.js"></script>
+
+    <!-- Vanilla Tilt (3D Card Effect) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
     <!-- Marked.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -89,6 +95,7 @@
         backdrop-filter: blur(14px);
         position: relative;
         overflow: hidden;
+        transform-style: preserve-3d;
       }
 
       .glass-card::before {
@@ -255,7 +262,6 @@
       }
 
       .glass-card:hover {
-        transform: translateY(-4px) scale(1.01);
         box-shadow: 0 25px 50px rgba(15, 23, 42, 1);
       }
 
@@ -379,7 +385,6 @@
 
       body.light-mode .glass-card:hover {
         box-shadow: 0 25px 70px rgba(102, 126, 234, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
@@ -609,12 +614,12 @@
 
           <!-- Main Content -->
           <main class="flex-1 overflow-y-auto scrollbar-thin">
-            <div class="max-w-7xl mx-auto p-6 lg:p-8 space-y-6">
+            <div class="max-w-7xl mx-auto p-6 lg:p-8 pb-32">
             
             <!-- Dashboard View -->
             <section
               data-view="dashboard"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
             >
               <div class="mb-2">
                 <h1 class="text-3xl font-bold text-slate-50 mb-2">Employability Command Center</h1>
@@ -645,7 +650,7 @@
               </div>
 
               <!-- Quick Stats Cards -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Readiness Score -->
                 <div class="glass-card rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 group animate-scale-in" style="--stagger-delay: 0">
                   <div class="flex items-center justify-between mb-3">
@@ -721,10 +726,15 @@
                       You vs. Market vs. Curriculum
                     </h2>
                   </div>
-                  <div class="flex gap-2 text-[10px]">
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> You</span>
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Market</span>
-                    <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-slate-500"></span> Syllabus</span>
+                  <div class="flex items-center gap-3">
+                    <button id="btn-toggle-chart" class="px-2 py-1 rounded bg-slate-800/60 border border-slate-700 text-[10px] text-slate-300 hover:text-white hover:bg-slate-700 transition">
+                        <i class="fa-solid fa-chart-pie mr-1"></i> <span id="chart-toggle-text">View Venn</span>
+                    </button>
+                    <div class="flex gap-2 text-[10px]">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> You</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Market</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-slate-500"></span> Syllabus</span>
+                    </div>
                   </div>
                 </div>
                 <div class="relative h-[350px] flex items-center justify-center">
@@ -772,7 +782,7 @@
           <!-- Student Profile View -->
           <section
             data-view="student-profile"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
           >
             <header class="flex items-center justify-between">
               <div>
@@ -820,7 +830,7 @@
           <!-- Market Insights View -->
           <section
             data-view="market-insights"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
           >
             <header class="flex items-center justify-between">
               <div>
@@ -958,7 +968,7 @@
           <!-- Analyzer View -->
           <section
             data-view="analyzer"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
           >
             <header class="flex items-center justify-between">
               <div>
@@ -994,6 +1004,15 @@
                     file:text-xs file:font-semibold
                     file:bg-cyan-500/10 file:text-cyan-400 hover:file:bg-cyan-500/20 transition"/>
                 </div>
+                <div class="mb-3">
+                  <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Import from URL (GitHub/LinkedIn)</label>
+                  <div class="flex items-center gap-2">
+                    <div class="relative flex-1">
+                        <i class="fa-brands fa-github absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input type="url" id="input-resume-url" placeholder="https://github.com/username" class="w-full bg-slate-900/60 border border-slate-700 rounded-lg py-2 pl-9 pr-4 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 transition">
+                    </div>
+                  </div>
+                </div>
                 <textarea id="input-resume-text" class="w-full h-40 bg-slate-900/60 border border-slate-700 rounded-xl p-3 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 transition resize-none" placeholder="Paste resume text or GitHub profile summary here..."></textarea>
                 <div class="mt-4 flex justify-end">
                   <button id="btn-process-resume" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition border border-slate-600">
@@ -1021,6 +1040,15 @@
                     file:text-xs file:font-semibold
                     file:bg-purple-500/10 file:text-purple-400 hover:file:bg-purple-500/20 transition"/>
                 </div>
+                <div class="mb-3">
+                  <label class="block text-[10px] text-slate-400 uppercase tracking-wider mb-1">Import from URL (University Site)</label>
+                  <div class="flex items-center gap-2">
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-link absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input type="url" id="input-syllabus-url" placeholder="https://university.edu/syllabus" class="w-full bg-slate-900/60 border border-slate-700 rounded-lg py-2 pl-9 pr-4 text-xs text-slate-300 focus:outline-none focus:border-purple-500 transition">
+                    </div>
+                  </div>
+                </div>
                 <textarea id="input-syllabus-text" class="w-full h-40 bg-slate-900/60 border border-slate-700 rounded-xl p-3 text-xs text-slate-300 focus:outline-none focus:border-purple-500 transition resize-none" placeholder="Paste syllabus content or course list here..."></textarea>
                 <div class="mt-4 flex justify-end">
                   <button id="btn-process-syllabus" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition border border-slate-600">
@@ -1041,7 +1069,7 @@
           <!-- Roadmap View -->
           <section
             data-view="roadmap"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
           >
             <header class="flex items-center justify-between">
               <div>
@@ -1083,7 +1111,7 @@
           <!-- Role Simulator View -->
           <section
             data-view="simulator"
-              class="hidden flex-col gap-10 animate-fade-in"
+              class="hidden grid grid-cols-1 gap-6 animate-fade-in"
           >
             <header class="flex items-center justify-between">
               <div>
@@ -1107,6 +1135,11 @@
                 <option value="AI Engineer">AI Engineer</option>
                 <option value="DevOps Engineer">DevOps Engineer</option>
                 <option value="Cyber Security Analyst">Cyber Security Analyst</option>
+                <option value="Cloud Architect">Cloud Architect</option>
+                <option value="Blockchain Developer">Blockchain Developer</option>
+                <option value="Prompt Engineer">Prompt Engineer</option>
+                <option value="Quantum Researcher">Quantum Researcher</option>
+                <option value="AR/VR Developer">AR/VR Developer</option>
               </select>
             </div>
 
@@ -1430,6 +1463,7 @@
       let marketTrendChart = null;
       let isDarkMode = true;
       let aiChatOpen = false;
+      let isVennView = false;
       
       // Skill Engine State
       let currentSyllabusSkills = ["Python", "C++", "Data Structures", "Algorithms", "SQL", "Operating Systems"]; // Default mock
@@ -1441,7 +1475,12 @@
         "Data Scientist": ["Python", "SQL", "Machine Learning", "Statistics", "Pandas", "TensorFlow", "Tableau"],
         "AI Engineer": ["Python", "Deep Learning", "NLP", "PyTorch", "Cloud Computing", "MLOps", "Linear Algebra"],
         "DevOps Engineer": ["Linux", "Docker", "Kubernetes", "CI/CD", "AWS", "Python", "Bash"],
-        "Cyber Security Analyst": ["Networking", "Linux", "Python", "Ethical Hacking", "Cryptography", "SIEM", "Firewalls"]
+        "Cyber Security Analyst": ["Networking", "Linux", "Python", "Ethical Hacking", "Cryptography", "SIEM", "Firewalls"],
+        "Cloud Architect": ["AWS", "Azure", "Terraform", "Kubernetes", "Networking", "Security", "Linux"],
+        "Blockchain Developer": ["Solidity", "Rust", "Smart Contracts", "Web3.js", "Cryptography", "Ethereum"],
+        "Prompt Engineer": ["LLMs", "Python", "NLP", "Creative Writing", "Data Analysis", "API Integration"],
+        "Quantum Researcher": ["Quantum Mechanics", "Linear Algebra", "Python", "Qiskit", "C++", "Physics"],
+        "AR/VR Developer": ["Unity", "C#", "3D Math", "Unreal Engine", "C++", "Computer Graphics"]
       };
 
       const SCARCITY_DATA = [
@@ -1900,6 +1939,62 @@
         });
       }
 
+      function renderTwinVennChart() {
+        const ctx = document.getElementById("twin-radar-chart")?.getContext("2d");
+        if (!ctx) return;
+        if (twinRadarChart) twinRadarChart.destroy();
+
+        const student = currentResumeSkills;
+        const market = ROLE_SKILLS[currentTargetRole] || [];
+        const syllabus = currentSyllabusSkills;
+
+        const intersection = (arr1, arr2) => arr1.filter(x => arr2.some(y => y.toLowerCase() === x.toLowerCase()));
+
+        const s_m = intersection(student, market);
+        const s_a = intersection(student, syllabus);
+        const m_a = intersection(market, syllabus);
+        const s_m_a = intersection(s_m, syllabus);
+
+        const data = [
+            { sets: ['You'], value: student.length || 1 },
+            { sets: ['Market'], value: market.length || 1 },
+            { sets: ['Syllabus'], value: syllabus.length || 1 },
+            { sets: ['You', 'Market'], value: s_m.length },
+            { sets: ['You', 'Syllabus'], value: s_a.length },
+            { sets: ['Market', 'Syllabus'], value: m_a.length },
+            { sets: ['You', 'Market', 'Syllabus'], value: s_m_a.length }
+        ];
+
+        twinRadarChart = new Chart(ctx, {
+            type: 'venn',
+            data: {
+                labels: ['You', 'Market', 'Syllabus'],
+                datasets: [{
+                    label: 'Skill Overlap',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(34, 211, 238, 0.5)',
+                        'rgba(168, 85, 247, 0.5)',
+                        'rgba(148, 163, 184, 0.5)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'bottom', labels: { color: '#94a3b8' } },
+                    tooltip: {
+                        callbacks: {
+                            title: (context) => context[0].raw.sets.join(' & '),
+                            label: (context) => `Overlap: ${context.raw.value} Skills`
+                        }
+                    }
+                }
+            }
+        });
+      }
+
       function renderMarketTicker() {
         const ticker = document.getElementById("market-ticker");
         if(!ticker) return;
@@ -2126,7 +2221,11 @@
 
         // Radar Chart
         setTimeout(() => {
-            renderTwinRadarChart();
+            if(isVennView) {
+                renderTwinVennChart();
+            } else {
+                renderTwinRadarChart();
+            }
         }, 300);
 
         renderMarketTicker();
@@ -2207,7 +2306,10 @@
             return;
         }
 
-        container.innerHTML = analysis.missing.map((skill, idx) => `
+        container.innerHTML = analysis.missing.map((skill, idx) => {
+            const ytLink = `https://www.youtube.com/results?search_query=${encodeURIComponent(skill + " full course tutorial")}`;
+            const projectLink = `https://github.com/search?q=${encodeURIComponent(skill + " beginner project")}&type=repositories`;
+            return `
             <div class="relative animate-slide-in-right" style="animation-delay: ${idx * 0.2}s">
                 <div class="absolute -left-[41px] top-0 h-6 w-6 rounded-full bg-slate-900 border-2 border-cyan-500 flex items-center justify-center z-10">
                     <span class="text-[10px] text-cyan-400 font-bold">${idx + 1}</span>
@@ -2216,28 +2318,48 @@
                     <h4 class="text-sm font-bold text-slate-100">Week ${idx + 1}: Master ${skill}</h4>
                     <p class="text-xs text-slate-400 mt-1">Focus on core concepts and build a mini-project.</p>
                     <div class="mt-3 flex gap-2">
-                        <button class="px-3 py-1 bg-cyan-500/10 text-cyan-300 text-[10px] rounded border border-cyan-500/30 hover:bg-cyan-500/20">
+                        <a href="${ytLink}" target="_blank" class="px-3 py-1 bg-cyan-500/10 text-cyan-300 text-[10px] rounded border border-cyan-500/30 hover:bg-cyan-500/20 flex items-center gap-2">
                             <i class="fa-brands fa-youtube"></i> Watch Tutorial
-                        </button>
-                        <button class="px-3 py-1 bg-purple-500/10 text-purple-300 text-[10px] rounded border border-purple-500/30 hover:bg-purple-500/20">
-                            <i class="fa-solid fa-code"></i> Practice Project
-                        </button>
+                        </a>
+                        <a href="${projectLink}" target="_blank" class="px-3 py-1 bg-purple-500/10 text-purple-300 text-[10px] rounded border border-purple-500/30 hover:bg-purple-500/20 flex items-center gap-2">
+                            <i class="fa-brands fa-github"></i> Practice Project
+                        </a>
                     </div>
                 </div>
             </div>
-        `).join("");
+        `}).join("");
+
+        // Initialize Tilt on new roadmap cards
+        if (typeof VanillaTilt !== "undefined") {
+            VanillaTilt.init(container.querySelectorAll(".glass-card"), {
+                max: 5,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+                scale: 1.02
+            });
+        }
 
         const recContainer = document.getElementById("course-recommendations");
         if(recContainer) {
+            const courseraLink = `https://www.coursera.org/search?query=${encodeURIComponent(currentTargetRole + " Specialization")}`;
+            const udemyLink = `https://www.udemy.com/courses/search/?q=${encodeURIComponent("Complete " + (analysis.missing[0] || "Skill") + " Bootcamp")}`;
+
             recContainer.innerHTML = `
-                <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800 hover:border-cyan-500/30 transition cursor-pointer">
-                    <p class="text-xs font-bold text-slate-200">Coursera: ${currentTargetRole} Specialization</p>
-                    <p class="text-[10px] text-slate-500">Rated 4.8/5 • 3 Months</p>
-                </div>
-                <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800 hover:border-purple-500/30 transition cursor-pointer">
-                    <p class="text-xs font-bold text-slate-200">Udemy: Complete ${analysis.missing[0] || "Skill"} Bootcamp</p>
-                    <p class="text-[10px] text-slate-500">Rated 4.7/5 • 20 Hours</p>
-                </div>
+                <a href="${courseraLink}" target="_blank" class="block p-3 rounded-lg bg-slate-900/50 border border-slate-800 hover:border-cyan-500/30 transition cursor-pointer group">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs font-bold text-slate-200 group-hover:text-cyan-400 transition">Coursera: ${currentTargetRole} Specialization</p>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-cyan-400"></i>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mt-1">Rated 4.8/5 • 3 Months</p>
+                </a>
+                <a href="${udemyLink}" target="_blank" class="block p-3 rounded-lg bg-slate-900/50 border border-slate-800 hover:border-purple-500/30 transition cursor-pointer group">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs font-bold text-slate-200 group-hover:text-purple-400 transition">Udemy: Complete ${analysis.missing[0] || "Skill"} Bootcamp</p>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-500 group-hover:text-purple-400"></i>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mt-1">Rated 4.7/5 • 20 Hours</p>
+                </a>
             `;
         }
       }
@@ -2505,14 +2627,30 @@
         const btnProcessResume = document.getElementById("btn-process-resume");
         if(btnProcessResume) btnProcessResume.addEventListener("click", async () => {
             const fileInput = document.getElementById("file-resume");
+            const urlInput = document.getElementById("input-resume-url");
             let text = document.getElementById("input-resume-text").value;
             
             if (fileInput && fileInput.files.length > 0) {
                 showToast("Reading PDF...", "info");
                 const pdfText = await extractTextFromPDF(fileInput.files[0]);
                 text += "\n" + pdfText;
-                document.getElementById("input-resume-text").value = text; // Update textarea
             }
+
+            if (urlInput && urlInput.value.trim()) {
+                const url = urlInput.value.trim();
+                showToast("Analyzing external profile via AI...", "info");
+                try {
+                    const prompt = `Analyze the public developer profile at ${url}. Extract a list of technical skills, programming languages, frameworks, and tools mentioned or used in repositories. Return ONLY a comma-separated list of skills.`;
+                    const aiData = await callGemini(prompt, true);
+                    text += "\n" + aiData;
+                    showToast("Profile data extracted successfully.", "success");
+                } catch (e) {
+                    console.error("Profile analysis failed", e);
+                    showToast("Could not analyze URL. Try pasting text.", "error");
+                }
+            }
+
+            document.getElementById("input-resume-text").value = text; // Update textarea
 
             if(text.trim()) {
                 const skills = extractSkillsFromText(text);
@@ -2523,21 +2661,37 @@
                     showToast("No known skills found. Try adding keywords manually.", "info");
                 }
             } else {
-                showToast("Please upload a PDF or paste text.", "error");
+                showToast("Please upload a PDF, enter a URL, or paste text.", "error");
             }
         });
 
         const btnProcessSyllabus = document.getElementById("btn-process-syllabus");
         if(btnProcessSyllabus) btnProcessSyllabus.addEventListener("click", async () => {
             const fileInput = document.getElementById("file-syllabus");
+            const urlInput = document.getElementById("input-syllabus-url");
             let text = document.getElementById("input-syllabus-text").value;
 
             if (fileInput && fileInput.files.length > 0) {
                 showToast("Reading PDF...", "info");
                 const pdfText = await extractTextFromPDF(fileInput.files[0]);
                 text += "\n" + pdfText;
-                document.getElementById("input-syllabus-text").value = text;
             }
+
+            if (urlInput && urlInput.value.trim()) {
+                const url = urlInput.value.trim();
+                showToast("Analyzing syllabus URL via AI...", "info");
+                try {
+                    const prompt = `Analyze the academic syllabus or course curriculum at ${url}. Extract a list of technical topics, subjects, and skills covered. Return ONLY a comma-separated list of skills/topics.`;
+                    const aiData = await callGemini(prompt, true);
+                    text += "\n" + aiData;
+                    showToast("Syllabus data extracted successfully.", "success");
+                } catch (e) {
+                    console.error("Syllabus analysis failed", e);
+                    showToast("Could not analyze URL. Try pasting text.", "error");
+                }
+            }
+
+            document.getElementById("input-syllabus-text").value = text;
 
             if(text.trim()) {
                 const skills = extractSkillsFromText(text);
@@ -2548,7 +2702,7 @@
                     showToast("No relevant skills found in syllabus.", "info");
                 }
             } else {
-                showToast("Please upload a PDF or paste text.", "error");
+                showToast("Please upload a PDF, enter a URL, or paste text.", "error");
             }
         });
 
@@ -2640,6 +2794,33 @@
             if (clearBtn) clearBtn.classList.add("hidden");
             renderMarketFeedTable(DEFAULT_MARKET_FEEDS);
         });
+
+        // Chart Toggle
+        const btnToggleChart = document.getElementById("btn-toggle-chart");
+        if(btnToggleChart) btnToggleChart.addEventListener("click", () => {
+            isVennView = !isVennView;
+            const btnText = document.getElementById("chart-toggle-text");
+            if(isVennView) {
+                btnText.textContent = "View Radar";
+                renderTwinVennChart();
+            } else {
+                btnText.textContent = "View Venn";
+                renderTwinRadarChart();
+            }
+        });
+      }
+
+      function initTilt() {
+        // Apply 3D Tilt to main content cards
+        if (typeof VanillaTilt !== "undefined") {
+            VanillaTilt.init(document.querySelectorAll("main .glass-card"), {
+                max: 5,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+                scale: 1.02
+            });
+        }
       }
 
       /**********************
@@ -2653,6 +2834,7 @@
         // The restoreSession() function is commented out to enforce this.
         showLogin();
         updateNotificationBadge();
+        initTilt();
       });
     </script>
   </body>
