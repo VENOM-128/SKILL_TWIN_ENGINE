@@ -737,8 +737,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="relative h-[350px] flex items-center justify-center">
+                <div class="relative h-[420px] flex items-center justify-center">
                   <canvas id="twin-radar-chart"></canvas>
+                  <!-- Holographic Twin (centered) -->
+                  <div id="holo-twin" class="absolute z-20 pointer-events-none" aria-hidden="true">
+                    <div class="holo-ring holo-ring-1"></div>
+                    <div class="holo-ring holo-ring-2"></div>
+                    <div class="holo-core"></div>
+                  </div>
                   <!-- Overlay for empty state -->
                   <div id="twin-empty-state" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/80 backdrop-blur-sm rounded-xl z-10 hidden">
                     <i class="fa-solid fa-dna text-4xl text-slate-600 mb-3"></i>
@@ -1276,9 +1282,13 @@
     <div
       id="login-view"
       class="hidden min-h-screen flex items-center justify-center px-4 py-10 animate-fade-in"
+      style="position:fixed; inset:0; z-index:9999;"
     >
+      <!-- Backdrop to ensure login is in front -->
+      <div style="position:absolute; inset:0; background:rgba(2,6,23,0.7); backdrop-filter:blur(4px);"></div>
       <div
         class="glass-card w-full max-w-md rounded-3xl p-6 md:p-8 border border-slate-800/80 relative overflow-hidden"
+        style="position:relative; z-index:10000;"
       >
         <div
           class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 opacity-60 blur-3xl"
@@ -2536,6 +2546,15 @@
         if (!isRestored) {
           document.getElementById("username").value = "";
           document.getElementById("password").value = "";
+        }
+        // Remove login overlay from DOM so it no longer interferes with the app
+        const loginView = document.getElementById("login-view");
+        if (loginView) {
+          // hide first for a smooth transition, then remove
+          loginView.classList.add("hidden");
+          setTimeout(() => {
+            if (loginView.parentNode) loginView.parentNode.removeChild(loginView);
+          }, 300);
         }
       }
 
