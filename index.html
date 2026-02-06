@@ -2211,9 +2211,13 @@
             readinessCircle.style.setProperty('--progress', analysis.readinessScore);
         }
 
-        // Gap Count
-        const gapCountEl = document.getElementById("dash-gap-count");
-        if(gapCountEl) gapCountEl.textContent = analysis.missing.length;
+        // Student Gap Count
+        const studentGapEl = document.getElementById("dash-student-gap-count");
+        if(studentGapEl) studentGapEl.textContent = analysis.studentGaps.length;
+
+        // Curriculum Gap Count
+        const curriculumGapEl = document.getElementById("dash-curriculum-gap-count");
+        if(curriculumGapEl) curriculumGapEl.textContent = analysis.curriculumGaps.length;
 
         // Target Role
         const roleEl = document.getElementById("dash-target-role");
