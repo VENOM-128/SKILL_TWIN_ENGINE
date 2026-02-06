@@ -1,0 +1,48 @@
+/* ================================
+   THEME COLORS & ROOT CONFIGURATION
+   ================================ */
+
+:root {
+  color-scheme: dark;
+  
+  /* Primary Colors */
+  --color-primary-cyan: #22d3ee;
+  --color-primary-purple: #a855f7;
+  --color-primary-emerald: #22c55e;
+  
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #fbbf24;
+  --color-danger: #fb7185;
+  --color-info: #22d3ee;
+  
+  /* Background Gradient */
+  --bg-dark-0: #0f172a;
+  --bg-dark-1: #020617;
+  --bg-dark-2: #000;
+  
+  /* Glass Effect */
+  --glass-bg: rgba(30, 41, 59, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+}
+
+body {
+  background: radial-gradient(circle at top left, #0f172a 0, #020617 45%, #000 100%);
+  min-height: 100vh;
+  color-scheme: dark;
+}
+
+/* Light Mode Colors */
+body.light-mode {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #1e293b;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

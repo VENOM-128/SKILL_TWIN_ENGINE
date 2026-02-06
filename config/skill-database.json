@@ -1,0 +1,17 @@
+{
+  "skillDatabase": [
+    "Python", "Java", "C++", "JavaScript", "React", "Node.js", "SQL", "MongoDB",
+    "AWS", "Docker", "Machine Learning", "Data Structures", "Algorithms",
+    "Communication", "Git", "CSS", "HTML", "TypeScript", "Go", "Rust",
+    "Kubernetes", "Terraform", "Linux", "Azure", "GCP", "Tableau", "Power BI",
+    "Excel", "Statistics", "Calculus", "Linear Algebra", "Deep Learning", "NLP",
+    "Computer Vision", "Cyber Security", "Networking", "Ethical Hacking",
+    "DevOps", "CI/CD", "Agile", "Scrum", "Jira", "Figma", "Redux", "Express",
+    "Django", "Flask", "Spring Boot", "Hibernate", "PostgreSQL", "MySQL", "Oracle"
+  ],
+  "defaultMockSkills": {
+    "syllabus": ["Python", "C++", "Data Structures", "Algorithms", "SQL", "Operating Systems"],
+    "resume": ["Python", "HTML", "CSS", "JavaScript"]
+  },
+  "defaultTargetRole": "Full Stack Developer"
+}

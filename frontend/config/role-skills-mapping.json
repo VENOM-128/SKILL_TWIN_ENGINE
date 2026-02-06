@@ -1,0 +1,12 @@
+{
+  "fullStackDeveloper": ["JavaScript", "React", "Node.js", "SQL", "MongoDB", "Docker", "AWS"],
+  "dataScientist": ["Python", "SQL", "Machine Learning", "Statistics", "Pandas", "TensorFlow", "Tableau"],
+  "aiEngineer": ["Python", "Deep Learning", "NLP", "PyTorch", "Cloud Computing", "MLOps", "Linear Algebra"],
+  "devOpsEngineer": ["Linux", "Docker", "Kubernetes", "CI/CD", "AWS", "Python", "Bash"],
+  "cyberSecurityAnalyst": ["Networking", "Linux", "Python", "Ethical Hacking", "Cryptography", "SIEM", "Firewalls"],
+  "cloudArchitect": ["AWS", "Azure", "Terraform", "Kubernetes", "Networking", "Security", "Linux"],
+  "blockchainDeveloper": ["Solidity", "Rust", "Smart Contracts", "Web3.js", "Cryptography", "Ethereum"],
+  "promptEngineer": ["LLMs", "Python", "NLP", "Creative Writing", "Data Analysis", "API Integration"],
+  "quantumResearcher": ["Quantum Mechanics", "Linear Algebra", "Python", "Qiskit", "C++", "Physics"],
+  "arVrDeveloper": ["Unity", "C#", "3D Math", "Unreal Engine", "C++", "Computer Graphics"]
+}

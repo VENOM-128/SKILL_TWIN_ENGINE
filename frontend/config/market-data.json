@@ -1,0 +1,19 @@
+[
+  { "role": "Prompt Engineer", "stack": "GPT-4, Python", "demand": "Very High", "salary": "₹18 LPA" },
+  { "role": "Quantum Algo Researcher", "stack": "Qiskit, Python", "demand": "High", "salary": "₹35 LPA" },
+  { "role": "AI Ethicist", "stack": "Policy, NLP", "demand": "Medium", "salary": "₹22 LPA" },
+  { "role": "DevSecOps Engineer", "stack": "Docker, K8s", "demand": "High", "salary": "₹28 LPA" },
+  { "role": "Smart Contract Dev", "stack": "Solidity, Hardhat", "demand": "High", "salary": "₹30 LPA" },
+  { "role": "Full Stack Developer", "stack": "MERN, Next.js", "demand": "Very High", "salary": "₹12 LPA" },
+  { "role": "Data Scientist", "stack": "Python, TensorFlow", "demand": "High", "salary": "₹18 LPA" },
+  { "role": "Cloud Architect", "stack": "AWS, Azure", "demand": "High", "salary": "₹32 LPA" },
+  { "role": "Cybersecurity Analyst", "stack": "SIEM, Python", "demand": "High", "salary": "₹14 LPA" },
+  { "role": "ML Engineer", "stack": "PyTorch, Scikit", "demand": "High", "salary": "₹20 LPA" },
+  { "role": "Blockchain Developer", "stack": "Rust, Solidity", "demand": "Medium", "salary": "₹25 LPA" },
+  { "role": "AR/VR Developer", "stack": "Unity, C#", "demand": "Medium", "salary": "₹16 LPA" },
+  { "role": "Rust Systems Dev", "stack": "Rust, C++", "demand": "High", "salary": "₹24 LPA" },
+  { "role": "Golang Backend", "stack": "Go, Microservices", "demand": "High", "salary": "₹22 LPA" },
+  { "role": "K8s Administrator", "stack": "Kubernetes, Helm", "demand": "High", "salary": "₹26 LPA" },
+  { "role": "NLP Specialist", "stack": "HuggingFace, Spacy", "demand": "High", "salary": "₹21 LPA" },
+  { "role": "Big Data Engineer", "stack": "Spark, Hadoop", "demand": "Medium", "salary": "₹19 LPA" }
+]

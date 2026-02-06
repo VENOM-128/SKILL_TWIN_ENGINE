@@ -1,0 +1,7 @@
+[
+  { "skill": "React.js", "supply": 412, "demand": 85, "salary": "₹8 LPA", "type": "saturated" },
+  { "skill": "Python (Basic)", "supply": 650, "demand": 200, "salary": "₹7 LPA", "type": "saturated" },
+  { "skill": "Rust (WASM)", "supply": 3, "demand": 14, "salary": "₹24 LPA", "type": "opportunity" },
+  { "skill": "Cobol (Legacy)", "supply": 1, "demand": 22, "salary": "₹18 LPA", "type": "opportunity" },
+  { "skill": "AI Ethics", "supply": 12, "demand": 45, "salary": "₹22 LPA", "type": "opportunity" }
+]
